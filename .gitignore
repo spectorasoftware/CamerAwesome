@@ -4,9 +4,11 @@
 .packages
 .pub/
 .idea/
+.fvm
 
 build/
 
 test_lab.sh
 firebase_key.txt
 google-services.json
+.vscode/settings.json

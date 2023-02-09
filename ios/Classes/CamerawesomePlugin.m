@@ -292,7 +292,8 @@ FlutterEventSink imageStreamEventSink;
     return;
   }
   
-  [_camera stop];
+  [self->_registry unregisterTexture:self->_textureId];
+  [self->_camera stop];
   
   result(@(YES));
 }
