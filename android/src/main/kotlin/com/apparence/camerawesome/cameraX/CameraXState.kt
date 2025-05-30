@@ -149,7 +149,7 @@ data class CameraXState(
                 previews!!.add(preview)
 
                 if (currentCaptureMode == CaptureModes.PHOTO) {
-                    val imageCapture = ImageCapture.Builder().setCameraSelector(cameraSelector)
+                    val imageCapture = ImageCapture.Builder()
 //                .setJpegQuality(100)
                         .apply {
                             //photoSize?.let { setTargetResolution(it) }
@@ -223,8 +223,12 @@ data class CameraXState(
                     .build()
                 }
                 previews!!.add(
-                    Preview.Builder().setResolutionSelector(resolutionSelector)
-                        .setCameraSelector(cameraSelector).build()
+                    if (aspectRatio != null) {
+                        Preview.Builder().setTargetAspectRatio(aspectRatio!!)
+                            .build()
+                    } else {
+                        Preview.Builder().build()
+                    }
                 )
 
                 previews!!.first().setSurfaceProvider(
@@ -234,7 +238,7 @@ data class CameraXState(
             }
 
             if (currentCaptureMode == CaptureModes.PHOTO) {
-                val imageCapture = ImageCapture.Builder().setCameraSelector(cameraSelector)
+                val imageCapture = ImageCapture.Builder()
 //                .setJpegQuality(100)
                     .apply {
                         //photoSize?.let { setTargetResolution(it) }
